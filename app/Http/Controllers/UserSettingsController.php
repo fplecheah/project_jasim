@@ -84,4 +84,48 @@ class UserSettingsController extends Controller
         $user_settings->delete();
         return response()->json(['message' => 'Row Deleted successfully']);
     }
+
+    
+    public function storeWithdraw(Request $request,$id)
+    {
+        $validation_rules = [
+            'withdrawable' => 'numeric'
+        ];
+        $validator = Validator::make($request->all(), $validation_rules );
+        if($validator->fails()) {
+            return response()->json([
+                'message' => 'Please fix the issue',
+                'validate_err'=> $validator->messages(),
+            ]);
+        }
+
+        $user_settings = UserSetting::where('user_id', $id)->first();
+        $user_settings->update($request->all());
+        return response()->json([
+            'success' => 'user',
+            'user'=> $user_settings
+        ]);
+    }
+
+    public function storeWithdrawPost(Request $request)
+    {
+        $validation_rules = [
+            'withdrawable' => 'numeric'
+        ];
+        $validator = Validator::make($request->all(), $validation_rules );
+        if($validator->fails()) {
+            return response()->json([
+                'message' => 'Please fix the issue',
+                'validate_err'=> $validator->messages(),
+            ]);
+        }
+        $user = auth()->user();
+        $user_id = $user->id;
+        $user_settings = UserSetting::where('user_id',$user_id)->first();
+        $user_settings->update($request->all());
+        return response()->json([
+            'success' => 'user',
+            'user'=> $user_settings
+        ]);
+    }
 }
