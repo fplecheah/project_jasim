@@ -13,7 +13,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 class UserController extends Controller
 {
     //To get all the users
-    public function index(){
+    public function index(){ 
         
         if (Auth::check()) {
             $users = DB::table('users')->get();
