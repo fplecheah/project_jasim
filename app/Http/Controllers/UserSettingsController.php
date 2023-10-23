@@ -122,7 +122,7 @@ class UserSettingsController extends Controller
         $user = auth()->user();
         $user_id = $user->id;
         $user_settings = UserSetting::where('user_id',$user_id)->first();
-        $user_settings->update($request->all());
+        $user_settings->update($request->all()); 
         return response()->json([
             'success' => 'user',
             'user'=> $user_settings

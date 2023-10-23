@@ -58,7 +58,7 @@ Route::patch('settingUpdate/{id}',[UserSettingsController::class ,'update']);
 Route::put('/settingRemove/{id}',[UserSettingsController::class ,'destroy']);
 //update widthdraw
 Route::put('/settingStoreWithdraw/{id}',[UserSettingsController::class ,'storeWithdraw']);
-Route::post('/settingStoreWithdrawPost',[UserSettingsController::class ,'storeWithdrawPost']);
+Route::post('/settingStoreWithdrawPost',[UserSettingsController::class ,'storeWithdrawPost']); 
 
 //User Profile api's
 Route::get('userProfile',[UserProfileController::class , 'fetch']);
