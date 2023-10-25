@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserSettingsController;
+use App\Http\Controllers\UserSettingController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\LoginController;
@@ -44,6 +44,7 @@ Route::post('login',[LoginController::class , 'login']);
 Route::post('product_create',[ProductsController::class ,'store']);
 
 Route::group(['middleware' => 'auth:sanctum'],function(){
+    Route::apiResource('/tasks',TaskController::class);
     Route::get('userDetails',[UserController::class,'userDetails']);
     Route::get('/users',[UserController::class ,'index']);
     Route::get('/users/{user}',[UserController::class ,'show']);
@@ -51,14 +52,8 @@ Route::group(['middleware' => 'auth:sanctum'],function(){
     Route::post('/users',[UserController::class ,'store']);
 
     //userSetting api's
-Route::post('settingStore',[UserSettingsController::class ,'store']);
-Route::post('settingDisplay',[UserSettingsController::class ,'display']);
-Route::get('settingDisplay/{id}',[UserSettingsController::class ,'displayGet']);
-Route::patch('settingUpdate/{id}',[UserSettingsController::class ,'update']);
-Route::put('/settingRemove/{id}',[UserSettingsController::class ,'destroy']);
-//update widthdraw
-Route::put('/settingStoreWithdraw/{id}',[UserSettingsController::class ,'storeWithdraw']);
-Route::post('/settingStoreWithdrawPost',[UserSettingsController::class ,'storeWithdrawPost']);
+Route::apiResource('/user-setting',UserSettingController::class);
+
 
 //User Profile api's
 Route::get('userProfile',[UserProfileController::class , 'fetch']);
@@ -69,3 +64,4 @@ Route::patch('updateUserProfile/{id}',[UserProfileController::class , 'update'])
 
 Route::post('logout', [LoginController::class , 'logout']);
 });
+
