@@ -10,19 +10,15 @@ use Illuminate\Support\Facades\Validator;
 
 class UserProfileController extends Controller
 {
-    //Fetch all details from user setting and users tabe
+    //Fetch all details from user setting and users table 
+    //here we are getting all the users
     public function fetch()
     {
     //     $users = DB::table('user_settings')
     // ->join('users', 'user_settings.user_id', '=', 'users.id')
-    // ->select('users.name', 'users.email', 'user_settings.gender', 'user_settings.withdrawable') 
-    // ->where('withdrawable',1)
+    // ->select('users.name', 'users.email', 'user_settings.gender', 'user_settings.withdrawable')
     // ->get();
-    //     return response()->json([
-    //         'message' => 'success',
-    //         'data'=> $users,
-    //     ]);
-        $users = User::with('user_settings')->get();
+    $users = User::with('user_settings')->get();
         return response()->json([
             'message' => 'success',
             'data'=> $users,
@@ -30,12 +26,14 @@ class UserProfileController extends Controller
     }
 
 
+
+
     public function update(Request $request,$id)
     {   
-        $userData = $request->only('username', 'email','password');
-        return response()->json([
-            'request'=>$request
-        ]);
+        // $userData = $request->only('username', 'email','password');
+        // return response()->json([
+        //     'request'=>$request
+        // ]);
 
         $validation_rules = [
             'username' => 'sometimes|string|unique:users',
