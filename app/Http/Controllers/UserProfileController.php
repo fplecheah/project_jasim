@@ -13,11 +13,16 @@ class UserProfileController extends Controller
     //Fetch all details from user setting and users tabe
     public function fetch()
     {
-        $users = DB::table('user_settings')
-    ->join('users', 'user_settings.user_id', '=', 'users.id')
-    ->select('users.name', 'users.email', 'user_settings.gender', 'user_settings.withdrawable') 
-    ->where('withdrawable',1)
-    ->get();
+    //     $users = DB::table('user_settings')
+    // ->join('users', 'user_settings.user_id', '=', 'users.id')
+    // ->select('users.name', 'users.email', 'user_settings.gender', 'user_settings.withdrawable') 
+    // ->where('withdrawable',1)
+    // ->get();
+    //     return response()->json([
+    //         'message' => 'success',
+    //         'data'=> $users,
+    //     ]);
+        $users = User::with('user_settings')->get();
         return response()->json([
             'message' => 'success',
             'data'=> $users,
