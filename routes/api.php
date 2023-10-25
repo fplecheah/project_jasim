@@ -17,7 +17,7 @@ Route::post('/new_register',[AuthController::class,'register']);
 Route::post('new_logout',[AuthController::class,'logout']);
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| API Routes 
 |--------------------------------------------------------------------------
 |
 | Here is where you can register API routes for your application. These
@@ -58,11 +58,14 @@ Route::patch('settingUpdate/{id}',[UserSettingsController::class ,'update']);
 Route::put('/settingRemove/{id}',[UserSettingsController::class ,'destroy']);
 //update widthdraw
 Route::put('/settingStoreWithdraw/{id}',[UserSettingsController::class ,'storeWithdraw']);
-Route::post('/settingStoreWithdrawPost',[UserSettingsController::class ,'storeWithdrawPost']); 
+Route::post('/settingStoreWithdrawPost',[UserSettingsController::class ,'storeWithdrawPost']);
 
 //User Profile api's
 Route::get('userProfile',[UserProfileController::class , 'fetch']);
 Route::patch('updateUserProfile/{id}',[UserProfileController::class , 'update']);
+
+
+
 
 Route::post('logout', [LoginController::class , 'logout']);
 });
